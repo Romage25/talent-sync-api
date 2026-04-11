@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('location');
             $table->integer('salary_min')->nullable();
             $table->integer('salary_max')->nullable();
-            $table->string('varchar');
+            $table->string('job_type');
             $table->timestamps();
             $table->softDeletes();
         });
