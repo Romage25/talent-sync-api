@@ -16,8 +16,8 @@ return new class extends Migration
 
             $table->string('first_name')->after('id');
             $table->string('last_name')->after('first_name');
-            $table->string('phone_number')->after('last_name');
-            $table->string('address')->after('phone_number');
+            $table->string('phone_no')->after('last_name');
+            $table->string('address')->after('phone_no');
             $table->softDeletes();
         });
     }
@@ -32,7 +32,7 @@ return new class extends Migration
 
             $table->dropColumn('first_name');
             $table->dropColumn('last_name');
-            $table->dropColumn('phone_number');
+            $table->dropColumn('phone_no');
             $table->dropColumn('address');
             $table->dropSoftDeletes();
         });
