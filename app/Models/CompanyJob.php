@@ -16,12 +16,13 @@ class CompanyJob extends Model
         'created_by',
         'company_id',
         'job_status_id',
+        'job_type_id',
+        'job_setup_id',
         'title',
         'description',
         'location',
         'salary_min',
         'salary_max',
-        'job_type',
     ];
 
     public function creator(): BelongsTo
@@ -32,6 +33,16 @@ class CompanyJob extends Model
     public function company(): BelongsTo
     {
         return $this->belongsTo(Company::class);
+    }
+
+    public function type(): BelongsTo
+    {
+        return $this->belongsTo(JobType::class);
+    }
+
+    public function setup(): BelongsTo
+    {
+        return $this->belongsTo(JobSetup::class);
     }
 
     public function status(): BelongsTo
