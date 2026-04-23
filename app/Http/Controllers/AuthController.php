@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\Recruiter;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,8 +28,11 @@ class AuthController extends Controller
         $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json([
-            'user' => $user,
-            'token' => $token
+            'message' => 'Login successful',
+            'data' => [
+                'user' => (new UserResource($user))->resolve(),
+                'token' => $token
+            ]
         ]);
     }
 
@@ -60,9 +63,12 @@ class AuthController extends Controller
         $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json([
-            'user' => $user,
-            'token' => $token
-        ]);
+            'message' => 'Registration successful',
+            'data' => [
+                'user' => (new UserResource($user))->resolve(),
+                'token' => $token
+            ]
+        ], 201);
     }
 
     public function logout(Request $request)
