@@ -27,9 +27,9 @@ RUN composer install --no-dev --optimize-autoloader
 RUN chmod -R 775 storage bootstrap/cache
 
 # Clear caches (safe for production build)
-RUN php artisan config:clear
-RUN php artisan cache:clear
-RUN php artisan route:clear
+# RUN php artisan config:clear
+# RUN php artisan cache:clear
+# RUN php artisan route:clear
 
 # Render requires this port
 EXPOSE 10000
