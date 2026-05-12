@@ -23,6 +23,12 @@ COPY . .
 # Install dependencies
 RUN composer install --no-dev --optimize-autoloader
 
+RUN mkdir -p storage/framework/cache \
+    storage/framework/sessions \
+    storage/framework/views \
+    storage/logs \
+    bootstrap/cache
+
 # Fix Laravel permissions
 RUN chmod -R 775 storage bootstrap/cache
 
