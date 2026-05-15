@@ -82,9 +82,15 @@ class GoogleController extends Controller
                     );
                 }
 
+                $nameParts = explode(' ', $googleUser->getName(), 2);
+
+                $firstName = $nameParts[0] ?? '';
+                $lastName = $nameParts[1] ?? '';
+
                 // create new user
                 $user = User::create([
-                    'first_name' => $googleUser->getName(),
+                    'first_name' => $firstName,
+                    'last_name' => $lastName,
                     'email' => $googleUser->getEmail(),
                     'google_id' => $googleUser->getId(),
                     'avatar' => $googleUser->getAvatar(),
