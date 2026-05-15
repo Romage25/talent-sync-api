@@ -71,6 +71,33 @@ class AuthController extends Controller
         ], 201);
     }
 
+    public function completeProfile(Request $request)
+    {
+        $validated = $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'phone_no' => ['required', 'string', 'regex:/^(09|\+639)\d{9}$/'],
+            'address' => 'required|string|max:255',
+            'role' => ['required', 'in:recruiter,applicant'],
+        ]);
+
+        $user = $request->user();
+
+        $user->update([
+            'first_name' => $validated['first_name'],
+            'last_name' => $validated['last_name'],
+            'phone_no' => $validated['phone_no'],
+            'address' => $validated['address'],
+        ]);
+
+        // Spatie role
+        $user->syncRoles([$validated['role']]);
+
+        return response()->json([
+            'message' => 'Profile completed successfully.',
+        ]);
+    }
+
     public function logout(Request $request)
     {
         $request->user()->tokens()->delete();
